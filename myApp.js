@@ -1,5 +1,16 @@
 const express = require('express');
 const app = express();
+app.use(helmet({
+  frameguard: { action: 'deny' }, // Prevents clickjacking
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "trusted-cdn.com"]
+    }
+  },
+  referrerPolicy: { policy: "no-referrer" }
+}));
+
 
 
 
